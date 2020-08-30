@@ -11,17 +11,14 @@ import time
 class TimeManagment():
 
     def __init__(self):
-        self.time_start = datetime.now()
-        self.work_duration_hours = int(input("How many hours would you like to work?\n"))
-        self.work_duration_minutes = int(input("How many minutes would you like to work?\n"))
-
-    def endtime(self):
-        '''
-        Establishes when the work day ends
-        '''
-        self.time_start = datetime.now()
-        self.work_end = (self.time_start + timedelta(hours = self.work_duration_hours, minutes= self.work_duration_minutes)).strftime("%H:%M")
-        return(self.work_end)
+        self._time_start = datetime.now()
+        self._work_duration_hours = int(input(
+            "How many hours would you like to work?\n"))
+        self._work_duration_minutes = int(input(
+            "How many minutes would you like to work?\n"))
+        self._work_end = self._time_start + timedelta(
+            hours = self._work_duration_hours,
+            minutes= self._work_duration_minutes)
 
     def timer_alert(self):
         '''
@@ -29,12 +26,12 @@ class TimeManagment():
         should have a gui aspect as well
         '''
         c=1
-        alert = self.time_start + timedelta(seconds = 15)
+        alert = self._time_start + timedelta(minutes = 25)
         while True:
             if datetime.now() >= alert and c%4 != 0:
                 playsound("notification.mp3")
                 c+=1
-                alert = datetime.now() + timedelta(seconds = 15)
+                alert = datetime.now() + timedelta(minutes = 25)
             elif c%4 == 0:
                 playsound("notification.mp3")
                 time.sleep(0.5)
